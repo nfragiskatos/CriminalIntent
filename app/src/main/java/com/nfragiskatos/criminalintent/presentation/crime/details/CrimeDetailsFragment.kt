@@ -13,7 +13,11 @@ import java.util.UUID
 
 class CrimeDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentCrimeDetailsBinding
+    private var _binding : FragmentCrimeDetailsBinding? = null
+    private val binding
+        get() = checkNotNull(_binding) {
+            "Cannot access binding because it is null. Is the view visible?"
+        }
     private lateinit var crime: Crime
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +35,7 @@ class CrimeDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCrimeDetailsBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentCrimeDetailsBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -52,5 +56,10 @@ class CrimeDetailsFragment : Fragment() {
                 crime = crime.copy(isSolved = isChecked)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
