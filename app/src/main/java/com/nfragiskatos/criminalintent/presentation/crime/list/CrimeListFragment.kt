@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nfragiskatos.criminalintent.databinding.FragmentCrimeListBinding
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val TAG = "CrimeListFragment"
@@ -39,8 +40,9 @@ class CrimeListFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val crimes = viewModel.loadCrimes()
-                binding.crimeRecyclerView.adapter = CrimeListAdapter(crimes)
+                viewModel.crimes.collect{ crimes ->
+                    binding.crimeRecyclerView.adapter = CrimeListAdapter(crimes)
+                }
             }
         }
     }
