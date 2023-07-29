@@ -18,5 +18,11 @@
     <fragment
         android:id="@+id/crimeDetailsFragment"
         android:name="com.nfragiskatos.criminalintent.presentation.crime.details.CrimeDetailsFragment"
-        android:label="CrimeDetailsFragment" />
+        android:label="CrimeDetailsFragment"
+        tools:layout="@layout/fragment_crime_details"
+        >
+        <argument
+            android:name="crimeId"
+            app:argType="java.util.UUID" />
+    </fragment>
 </navigation>

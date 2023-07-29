@@ -1,19 +1,23 @@
 package com.nfragiskatos.criminalintent.presentation.crime.details
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.nfragiskatos.criminalintent.databinding.FragmentCrimeDetailsBinding
 import com.nfragiskatos.criminalintent.domain.Crime
 import java.util.Date
 import java.util.UUID
 
+private const val TAG = "CrimeDetailFragment"
 class CrimeDetailsFragment : Fragment() {
 
     private var _binding : FragmentCrimeDetailsBinding? = null
+    private val args: CrimeDetailsFragmentArgs by navArgs()
     private val binding
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
@@ -28,6 +32,8 @@ class CrimeDetailsFragment : Fragment() {
             date = Date(),
             isSolved = false
         )
+
+        Log.d(TAG, "The crime ID is: ${args.crimeId}")
     }
 
     override fun onCreateView(
