@@ -10,12 +10,12 @@ import com.nfragiskatos.criminalintent.domain.Crime
 
 class CrimeHolder(private val binding: ListItemCrimeBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(crime: Crime) {
+    fun bind(crime: Crime, onCrimeClicked: () -> Unit) {
         binding.crimeTitle.text = crime.title
         binding.crimeDate.text = crime.date.toString()
 
         binding.root.setOnClickListener {
-            Toast.makeText(binding.root.context, "${crime.title} clicked!", Toast.LENGTH_SHORT).show()
+            onCrimeClicked()
         }
 
         binding.crimeSolved.visibility = if (crime.isSolved) View.VISIBLE else View.GONE
@@ -23,7 +23,8 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) : RecyclerView.View
 }
 
 class CrimeListAdapter(
-    private val crimes: List<Crime>
+    private val crimes: List<Crime>,
+    private val onCrimeClicked: () -> Unit
 ) : RecyclerView.Adapter<CrimeHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CrimeHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,7 +35,7 @@ class CrimeListAdapter(
     override fun getItemCount(): Int = crimes.size
 
     override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
-        holder.bind(crimes[position])
+        holder.bind(crimes[position], onCrimeClicked)
     }
 
 }

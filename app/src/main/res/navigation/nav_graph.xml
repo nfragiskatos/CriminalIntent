@@ -10,5 +10,13 @@
         android:name="com.nfragiskatos.criminalintent.presentation.crime.list.CrimeListFragment"
         android:label="CrimeListFragment"
         tools:layout="@layout/fragment_crime_list"
-        />
+        >
+        <action
+            android:id="@+id/show_crime_detail"
+            app:destination="@id/crimeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crimeDetailsFragment"
+        android:name="com.nfragiskatos.criminalintent.presentation.crime.details.CrimeDetailsFragment"
+        android:label="CrimeDetailsFragment" />
 </navigation>
