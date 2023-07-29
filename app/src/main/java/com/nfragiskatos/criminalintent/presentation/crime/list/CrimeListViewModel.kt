@@ -26,7 +26,6 @@ class CrimeListViewModel : ViewModel() {
     init {
         viewModelScope.launch {
             crimeRepository.getCrimes().collect {
-                Log.d(TAG, "Collecting Crime Flow")
                 _crimes.value = it
             }
         }
