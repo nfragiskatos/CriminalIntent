@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,10 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.nfragiskatos.criminalintent.databinding.FragmentCrimeDetailsBinding
 import com.nfragiskatos.criminalintent.domain.Crime
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.Date
-import java.util.UUID
 
 private const val TAG = "CrimeDetailFragment"
 class CrimeDetailsFragment : Fragment() {
@@ -45,6 +44,8 @@ class CrimeDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, MyOnBackPressedCallback())
 
         binding.apply {
             crimeTitle.doOnTextChanged {text, _, _, _ ->
@@ -86,5 +87,17 @@ class CrimeDetailsFragment : Fragment() {
             crimeDate.text = crime.date.toString()
             crimeSolved.isChecked = crime.isSolved
         }
+    }
+
+    private inner class MyOnBackPressedCallback : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (binding.crimeTitle.text.isNotBlank()) {
+                isEnabled = false
+                requireActivity().onBackPressed()
+            } else {
+                Toast.makeText(context, "Please enter a title", Toast.LENGTH_LONG).show()
+            }
+        }
+
     }
 }
