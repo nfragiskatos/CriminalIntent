@@ -3,6 +3,9 @@ package com.nfragiskatos.criminalintent.presentation.crime.details
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -16,6 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.nfragiskatos.criminalintent.R
 import com.nfragiskatos.criminalintent.databinding.FragmentCrimeDetailsBinding
 import com.nfragiskatos.criminalintent.domain.Crime
 import com.nfragiskatos.criminalintent.presentation.crime.datepicker.DatePickerFragment
@@ -36,6 +40,11 @@ class CrimeDetailsFragment : Fragment() {
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -95,6 +104,31 @@ class CrimeDetailsFragment : Fragment() {
             }
 
             crimeSolved.isChecked = crime.isSolved
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.fragment_crime_details, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.delete_crime -> {
+                deleteCrime()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun deleteCrime() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.crime.value?.let {
+                viewModel.deleteCrime(it)
+                findNavController().popBackStack()
+            }
+
         }
     }
 
