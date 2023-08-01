@@ -1,6 +1,7 @@
 package com.nfragiskatos.criminalintent.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.nfragiskatos.criminalintent.domain.Crime
@@ -18,4 +19,7 @@ interface CrimeDao {
 
     @Update
     suspend fun updateCrime(crime: Crime)
+
+    @Insert
+    suspend fun addCrime(crime: Crime)
 }
