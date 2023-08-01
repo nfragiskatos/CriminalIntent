@@ -9,14 +9,18 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.nfragiskatos.criminalintent.databinding.FragmentCrimeDetailsBinding
 import com.nfragiskatos.criminalintent.domain.Crime
+import com.nfragiskatos.criminalintent.presentation.crime.datepicker.DatePickerFragment
 import kotlinx.coroutines.launch
+import java.util.Date
 
 private const val TAG = "CrimeDetailFragment"
 class CrimeDetailsFragment : Fragment() {
@@ -54,10 +58,6 @@ class CrimeDetailsFragment : Fragment() {
                 }
             }
 
-            crimeDate.apply {
-                isEnabled = false
-            }
-
             crimeSolved.setOnCheckedChangeListener { _, isChecked ->
                 viewModel.updateCrime { oldCrime ->
                     oldCrime.copy(isSolved = isChecked)
@@ -72,6 +72,11 @@ class CrimeDetailsFragment : Fragment() {
                 }
             }
         }
+
+        setFragmentResultListener(DatePickerFragment.REQUEST_KEY_DATE) {requestKey, bundle ->
+            val newDate = bundle.getSerializable(DatePickerFragment.BUNDLE_KEY_DATE) as Date
+            viewModel.updateCrime { it.copy(date = newDate) }
+        }
     }
 
     override fun onDestroyView() {
@@ -85,6 +90,10 @@ class CrimeDetailsFragment : Fragment() {
                 crimeTitle.setText(crime.title)
             }
             crimeDate.text = crime.date.toString()
+            crimeDate.setOnClickListener {
+                findNavController().navigate(CrimeDetailsFragmentDirections.selectDate(crime.date))
+            }
+
             crimeSolved.isChecked = crime.isSolved
         }
     }
