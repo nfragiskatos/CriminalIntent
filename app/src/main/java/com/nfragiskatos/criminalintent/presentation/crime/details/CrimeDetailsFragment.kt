@@ -1,7 +1,9 @@
 package com.nfragiskatos.criminalintent.presentation.crime.details
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -37,6 +40,10 @@ class CrimeDetailsFragment : Fragment() {
 
     private val viewModel: CrimeDetailsViewModel by viewModels {
         CrimeDetailsViewModelFactory(args.crimeId)
+    }
+
+    private val selectSuspect = registerForActivityResult(ActivityResultContracts.PickContact()) {uri ->
+        uri?.let { parseContactSelection(it) }
     }
 
     private val binding
@@ -74,6 +81,10 @@ class CrimeDetailsFragment : Fragment() {
                 viewModel.updateCrime { oldCrime ->
                     oldCrime.copy(isSolved = isChecked)
                 }
+            }
+
+            crimeSuspect.setOnClickListener {
+                selectSuspect.launch(null)
             }
         }
 
@@ -117,6 +128,10 @@ class CrimeDetailsFragment : Fragment() {
 
                 val chooser = Intent.createChooser(reportIntent, getString(R.string.send_report))
                 startActivity(chooser)
+            }
+
+            crimeSuspect.text = crime.suspect.ifEmpty {
+                getString(R.string.crime_suspect_text)
             }
         }
     }
@@ -162,6 +177,22 @@ class CrimeDetailsFragment : Fragment() {
         }
 
         return getString(R.string.crime_report, crime.title, dateString, solvedString, suspectText)
+    }
+
+    private fun parseContactSelection(contactUri: Uri) {
+        val queryFields = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
+
+        val queryCursor =
+            requireActivity().contentResolver.query(contactUri, queryFields, null, null, null)
+
+        queryCursor?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                val suspect = cursor.getString(0)
+                viewModel.updateCrime { oldCrime ->
+                    oldCrime.copy(suspect = suspect)
+                }
+            }
+        }
     }
 
     private inner class MyOnBackPressedCallback : OnBackPressedCallback(true) {
