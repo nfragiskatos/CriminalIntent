@@ -1,6 +1,7 @@
 package com.nfragiskatos.criminalintent.presentation.crime.details
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -86,6 +87,9 @@ class CrimeDetailsFragment : Fragment() {
             crimeSuspect.setOnClickListener {
                 selectSuspect.launch(null)
             }
+
+            val selectSuspectIntent = selectSuspect.contract.createIntent(requireContext(), null)
+            crimeSuspect.isEnabled = canResolveIntent(selectSuspectIntent)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -193,6 +197,13 @@ class CrimeDetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun canResolveIntent(intent: Intent) : Boolean {
+        val packageManager = requireActivity().packageManager
+        val resolvedActivity =
+            packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
+        return resolvedActivity != null
     }
 
     private inner class MyOnBackPressedCallback : OnBackPressedCallback(true) {
