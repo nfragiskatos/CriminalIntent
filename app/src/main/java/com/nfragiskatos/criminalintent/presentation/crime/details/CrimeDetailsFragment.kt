@@ -19,6 +19,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.doOnLayout
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -32,6 +33,7 @@ import com.nfragiskatos.criminalintent.R
 import com.nfragiskatos.criminalintent.databinding.FragmentCrimeDetailsBinding
 import com.nfragiskatos.criminalintent.domain.Crime
 import com.nfragiskatos.criminalintent.presentation.crime.datepicker.DatePickerFragment
+import com.nfragiskatos.criminalintent.utils.getScaledBitmap
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.Date
@@ -187,6 +189,8 @@ class CrimeDetailsFragment : Fragment() {
             crimeSuspect.text = crime.suspect.ifEmpty {
                 getString(R.string.crime_suspect_text)
             }
+
+            updatePhoto(crime.photoFileName)
         }
     }
 
@@ -300,6 +304,30 @@ class CrimeDetailsFragment : Fragment() {
         val resolvedActivity =
             packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
         return resolvedActivity != null
+    }
+
+    private fun updatePhoto(photoFileName: String?) {
+        if (binding.crimePhoto.tag != photoFileName) {
+            val photoFile = photoFileName?.let {
+                File(requireContext().applicationContext.filesDir, it)
+            }
+
+            if (photoFile?.exists() == true) {
+                binding.crimePhoto.doOnLayout { measuredView ->
+                    val scaledBitmap = getScaledBitmap(
+                        photoFile.path,
+                        measuredView.measuredWidth,
+                        measuredView.height
+                    )
+
+                    binding.crimePhoto.setImageBitmap(scaledBitmap)
+                    binding.crimePhoto.tag = photoFileName
+                }
+            } else {
+                binding.crimePhoto.setImageBitmap(null)
+                binding.crimePhoto.tag = null
+            }
+        }
     }
 
     private inner class MyOnBackPressedCallback : OnBackPressedCallback(true) {
