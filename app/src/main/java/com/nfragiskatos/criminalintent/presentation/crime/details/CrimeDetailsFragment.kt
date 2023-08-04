@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -32,6 +33,7 @@ import com.nfragiskatos.criminalintent.databinding.FragmentCrimeDetailsBinding
 import com.nfragiskatos.criminalintent.domain.Crime
 import com.nfragiskatos.criminalintent.presentation.crime.datepicker.DatePickerFragment
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.Date
 
 private const val TAG = "CrimeDetailFragment"
@@ -41,6 +43,8 @@ class CrimeDetailsFragment : Fragment() {
 
     private var _binding: FragmentCrimeDetailsBinding? = null
     private val args: CrimeDetailsFragmentArgs by navArgs()
+
+    private var photoName : String? = null
 
     private val viewModel: CrimeDetailsViewModel by viewModels {
         CrimeDetailsViewModelFactory(args.crimeId)
@@ -62,6 +66,14 @@ class CrimeDetailsFragment : Fragment() {
                 callContact.launch(null)
             }
         }
+
+    private val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicture()) {photoTaken ->
+        if (photoTaken && photoName != null) {
+            viewModel.updateCrime { oldCrime ->
+                oldCrime.copy(photoFileName = photoName)
+            }
+        }
+    }
 
 
     private val binding
@@ -111,6 +123,23 @@ class CrimeDetailsFragment : Fragment() {
             crimeCallSuspect.setOnClickListener {
                 requestContactPermission()
             }
+
+            crimeCamera.setOnClickListener {
+                photoName = "IMG_${Date()}.jpg"
+
+                val photoFile = File(requireContext().applicationContext.filesDir, photoName)
+
+                val photoUri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "com.nfragiskatos.criminalintent.fileprovider",
+                    photoFile
+                    )
+
+                takePhoto.launch(photoUri)
+            }
+
+            val takePhotoIntent = takePhoto.contract.createIntent(requireContext(), null)
+            crimeCamera.isEnabled = canResolveIntent(takePhotoIntent)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
