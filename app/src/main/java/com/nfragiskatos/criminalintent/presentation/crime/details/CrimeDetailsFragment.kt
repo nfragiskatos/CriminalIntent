@@ -191,6 +191,12 @@ class CrimeDetailsFragment : Fragment() {
             }
 
             updatePhoto(crime.photoFileName)
+
+            if (crime.photoFileName != null) {
+                crimePhoto.setOnClickListener {
+                    findNavController().navigate(CrimeDetailsFragmentDirections.viewImage(crime.photoFileName))
+                }
+            }
         }
     }
 

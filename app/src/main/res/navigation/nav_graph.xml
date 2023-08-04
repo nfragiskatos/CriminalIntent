@@ -27,6 +27,9 @@
         <action
             android:id="@+id/select_date"
             app:destination="@id/datePickerFragment" />
+        <action
+            android:id="@+id/view_image"
+            app:destination="@id/imageViewerFragment" />
     </fragment>
     <dialog
         android:id="@+id/datePickerFragment"
@@ -35,5 +38,14 @@
         <argument
             android:name="crimeDate"
             app:argType="java.util.Date" />
+    </dialog>
+    <dialog
+        android:id="@+id/imageViewerFragment"
+        android:name="com.nfragiskatos.criminalintent.presentation.crime.imageviewer.ImageViewerFragment"
+        android:label="ImageViewerFragment"
+        >
+        <argument
+            android:name="crimeImage"
+            app:argType="string" />
     </dialog>
 </navigation>
