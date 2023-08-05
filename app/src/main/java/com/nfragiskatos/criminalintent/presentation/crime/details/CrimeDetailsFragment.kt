@@ -33,6 +33,7 @@ import com.nfragiskatos.criminalintent.R
 import com.nfragiskatos.criminalintent.databinding.FragmentCrimeDetailsBinding
 import com.nfragiskatos.criminalintent.domain.Crime
 import com.nfragiskatos.criminalintent.presentation.crime.datepicker.DatePickerFragment
+import com.nfragiskatos.criminalintent.utils.getLocalizedFormattedDate
 import com.nfragiskatos.criminalintent.utils.getScaledBitmap
 import kotlinx.coroutines.launch
 import java.io.File
@@ -168,7 +169,7 @@ class CrimeDetailsFragment : Fragment() {
             if (crimeTitle.text.toString() != crime.title) {
                 crimeTitle.setText(crime.title)
             }
-            crimeDate.text = crime.date.toString()
+            crimeDate.text = getLocalizedFormattedDate(crime.date)
             crimeDate.setOnClickListener {
                 findNavController().navigate(CrimeDetailsFragmentDirections.selectDate(crime.date))
             }
