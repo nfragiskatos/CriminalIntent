@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ΕγληματικήΠρόθεση</string>
+    <string name="crime_title_hint">Καταχωρήστε έναν τίτλο για το έγκλημα.</string>
+    <string name="crime_title_label">Τίτλος</string>
+    <string name="crime_details_label">Λεπτομέριες</string>
+    <string name="crime_solved_label">Λυθεί</string>
+    <string name="new_crime">Νέο Έγκλημα</string>
+    <string name="delete_crime">Διαγράψετε το Έγκλημα</string>
+    <string name="crime_suspect_text">Διαλέξετε έναν Ύποπτο</string>
+    <string name="crime_report_text">Στείλετε μία Αναφορά Εγκλήματος</string>
+    <string name="crime_call_suspect_text">Καλέσετε τον Ύποπτο</string>
+    <string name="crime_report">%1$s!
+        Το έγκλημα ανακαλύφτηκε την %2$s. %3$s, και %4$s
+    </string>
+    <string name="crime_report_solved">Η υπόθεση λύθηκε</string>
+    <string name="crime_report_unsolved">Η υπόθεση δεν λύθηκε</string>
+    <string name="crime_report_no_suspect">δεν υπάρχει έναν ύποπτο.</string>
+    <string name="crime_report_suspect">ο ύποπτο είναι %1$s.</string>
+    <string name="crime_report_subject">Αναφορά Εγκλήματος της ΕγκληματικήΠρόθεση</string>
+    <string name="send_report">Στείλετε την αναφορά εγκλήματος με</string>
+</resources>
