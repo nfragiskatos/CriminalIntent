@@ -6,8 +6,10 @@
     <string name="crime_details_label">Detalles</string>
     <string name="crime_solved_label">Solucionado</string>
     <string name="new_crime">Crimen Nuevo</string>
+    <string name="delete_crime">Eliminar Crimen</string>
     <string name="crime_suspect_text">Elegir Sospechoso</string>
     <string name="crime_report_text">Enviar el Informe del Crimen</string>
+    <string name="crime_call_suspect_text">Llamar Sospechoso</string>
     <string name="crime_report">%1$s!
         El crimen fue descubierto el %2$s. %3$s, y %4$s
     </string>
