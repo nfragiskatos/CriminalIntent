@@ -19,4 +19,7 @@
     <string name="crime_report_suspect">ο ύποπτο είναι %1$s.</string>
     <string name="crime_report_subject">Αναφορά Εγκλήματος της ΕγκληματικήΠρόθεση</string>
     <string name="send_report">Στείλετε την αναφορά εγκλήματος με</string>
+    <string name="crime_photo_button_description">Βγάλετε φωτογραφία του τόπου του εγκλήματος</string>
+    <string name="crime_photo_no_image_description">Η φωτογραφία του τόπου του εγκλήματος (δεν βαλθεί)</string>
+    <string name="crime_photo_image_description">Η φωτογραφία του τόπου του εγκλήματος (δεν βαλθεί)</string>
 </resources>
