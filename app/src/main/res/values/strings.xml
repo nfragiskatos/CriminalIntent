@@ -23,4 +23,6 @@
     <string name="crime_photo_button_description">Take photo of crime scene</string>
     <string name="crime_photo_no_image_description">Crime scene photo (not set)</string>
     <string name="crime_photo_image_description">Crime scene photo (set)</string>
+    <string name="crime_solved_icon_solved_description">The case is solved</string>
+    <string name="crime_solved_icon_not_solved_description">The case is not solved</string>
 </resources>

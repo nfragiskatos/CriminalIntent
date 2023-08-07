@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.nfragiskatos.criminalintent.R
 import com.nfragiskatos.criminalintent.databinding.ListItemCrimeBinding
 import com.nfragiskatos.criminalintent.domain.Crime
 import com.nfragiskatos.criminalintent.utils.getLocalizedFormattedDate
@@ -20,7 +21,17 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) :
             onCrimeClicked(crime.id)
         }
 
-        binding.crimeSolved.visibility = if (crime.isSolved) View.VISIBLE else View.GONE
+        if (crime.isSolved) {
+            binding.crimeSolved.apply {
+                contentDescription = context.getString(R.string.crime_solved_icon_solved_description)
+                visibility = View.VISIBLE
+            }
+        } else {
+            binding.crimeSolved.apply {
+                contentDescription = context.getString(R.string.crime_solved_icon_not_solved_description)
+                visibility = View.INVISIBLE
+            }
+        }
     }
 }
 
