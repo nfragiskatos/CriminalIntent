@@ -19,6 +19,8 @@
     <string name="crime_report_suspect">el/la sospechoso/a es %s.</string>
     <string name="crime_report_subject">IntentoCriminal Informe del Crimen</string>
     <string name="send_report">Enviar el informe del crimen a través de</string>
+    <string name="crime_date_label">La Fecha del Crimen</string>
+    <string name="crime_suspect_label">El Sospechoso</string>
 
     <!--    Accessibility-->
     <string name="crime_photo_button_description">
@@ -33,4 +35,5 @@
     <string name="crime_solved_icon_solved_description">El caso está resuelto</string>
     <string name="crime_solved_icon_not_solved_description">El caso no está resuelto</string>
     <string name="crime_list_item_summary_description">%1$s, %2$s, %3$s</string>
+
 </resources>

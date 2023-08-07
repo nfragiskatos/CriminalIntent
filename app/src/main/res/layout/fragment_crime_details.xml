@@ -68,8 +68,17 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textAppearance="?attr/textAppearanceHeadline4"
         android:text="@string/crime_details_label"/>
+
+    <TextView
+        android:id="@+id/crime_date_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/crime_date_label"
+        android:labelFor="@+id/crime_date"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        />
 
     <Button
         android:id="@+id/crime_date"
@@ -82,6 +91,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/crime_solved_label"/>
+
+    <TextView
+        android:id="@+id/crime_suspect_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/crime_suspect_label"
+        android:labelFor="@+id/crime_suspect"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        />
 
     <Button
         android:id="@+id/crime_suspect"

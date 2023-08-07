@@ -18,6 +18,8 @@
     <string name="crime_report_suspect">the suspect is %1$s.</string>
     <string name="crime_report_subject">CriminalIntent Crime Report</string>
     <string name="send_report">Send crime report via</string>
+    <string name="crime_date_label">Date of Crime</string>
+    <string name="crime_suspect_label">Suspect</string>
     
 <!--    Accessibility-->
     <string name="crime_photo_button_description">Take photo of crime scene</string>
