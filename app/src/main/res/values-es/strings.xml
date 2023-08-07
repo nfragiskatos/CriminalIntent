@@ -32,4 +32,5 @@
     </string>
     <string name="crime_solved_icon_solved_description">El caso está resuelto</string>
     <string name="crime_solved_icon_not_solved_description">El caso no está resuelto</string>
+    <string name="crime_list_item_summary_description">%1$s, %2$s, %3$s</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.nfragiskatos.criminalintent.presentation.crime.list
 
+import android.icu.text.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,8 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) :
             onCrimeClicked(crime.id)
         }
 
+        itemView.contentDescription = buildCrimeSummary(crime)
+
         if (crime.isSolved) {
             binding.crimeSolved.apply {
                 contentDescription = context.getString(R.string.crime_solved_icon_solved_description)
@@ -32,6 +35,18 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) :
                 visibility = View.INVISIBLE
             }
         }
+    }
+
+    private fun buildCrimeSummary(crime: Crime): String {
+        val descDate = DateFormat.getDateInstance().format(crime.date)
+        val solvedSummary =
+            if (crime.isSolved) R.string.crime_solved_icon_solved_description else R.string.crime_solved_icon_not_solved_description
+        return itemView.context.getString(
+            R.string.crime_list_item_summary_description,
+            crime.title,
+            descDate,
+            itemView.context.getString(solvedSummary)
+        )
     }
 }
 
