@@ -74,6 +74,7 @@ class CrimeDetailsFragment : Fragment() {
         if (photoTaken && photoName != null) {
             viewModel.updateCrime { oldCrime ->
                 oldCrime.copy(photoFileName = photoName)
+
             }
         }
     }
@@ -336,6 +337,7 @@ class CrimeDetailsFragment : Fragment() {
                 binding.crimePhoto.tag = null
                 binding.crimePhoto.contentDescription = getString(R.string.crime_photo_no_image_description)
             }
+            binding.crimePhoto.announceForAccessibility(getString(R.string.crime_photo_updated_announcement))
         }
     }
 
