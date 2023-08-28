@@ -42,7 +42,8 @@
         <strong>Details View - Selecting / Calling Contact <br><br>
       </td>
       <td><img src="https://github.com/nfragiskatos/CriminalIntent/assets/38383279/623610d5-c934-4701-b270-3e583ebec0cb.png" width="200px" height="auto"></td>
-      <td><img src="https://github.com/nfragiskatos/CriminalIntent/assets/38383279/b4420fc5-80cd-4a19-82d1-43e9e4a0d71c.png" width="200px" height="auto"></td>
+      <td><img src="https://github.com/nfragiskatos/CriminalIntent/assets/38383279/fa8ed9d1-21fb-43eb-976b-55e6075f8db9.png" width="200px" height="auto"></td>
+      <td><img src="https://github.com/nfragiskatos/CriminalIntent/assets/38383279/3fe98914-1e9c-4ec0-b391-89d901fc53b8.png" width="200px" height="auto"></td>
     </tr>
     <tr>
       <td>
