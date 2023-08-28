@@ -1,5 +1,22 @@
 # CriminalIntent
 
+### Patterns / Technologies / Topics
+- Fragments + Fragment Results + Navigation + SafeArgs
+- RecyclerView
+- ViewModel
+- View Binding
+- ConstraintLayout
+- Coroutines
+- Room
+- Type Converters
+- Flow
+- Dialog/Date Picker
+- App Bar + Menus
+- Implicit Intents
+- Content Provider + Resolver
+- Localized Resources (English, Greek, Spanish)
+- Accessibility Features (Adding content descriptions and testing with TalkBack
+
 ### Screens + Features
 
 <table>
