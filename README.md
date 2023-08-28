@@ -24,5 +24,18 @@
       <td><img src="https://github.com/nfragiskatos/CriminalIntent/assets/38383279/454b6f99-243e-4b8a-9d3a-bbcbbd72a9ac.png" width="200px" height="auto"></td>
       <td><img src="https://github.com/nfragiskatos/CriminalIntent/assets/38383279/50c21b21-edf5-4f5c-98c4-3038958f035a.png" width="200px" height="auto"></td>
     </tr>
+    <tr>
+      <td>
+        <strong>Details View <br><br>
+        <em>Actions</em>
+        <ul>
+          <li> Edit, add, or delete a crime </li>
+          <li> Launch camera to take a picture </li>
+        </ul>
+      </td>
+      <td><img src="https://github.com/nfragiskatos/CriminalIntent/assets/38383279/89dc804f-e3f6-4856-8d37-aeb1f2aa5690.png" width="200px" height="auto"></td>
+      <td><img src="https://github.com/nfragiskatos/CriminalIntent/assets/38383279/a23ce43e-19da-4ac6-a032-8cc0a4de1f1a.png" width="200px" height="auto"></td>
+      <td><img src="https://github.com/nfragiskatos/CriminalIntent/assets/38383279/a8ddd69f-f8c3-4ba1-a04b-76f453c447a5.png" width="200px" height="auto"></td>
+    </tr>
   </tbody>
 </table>
