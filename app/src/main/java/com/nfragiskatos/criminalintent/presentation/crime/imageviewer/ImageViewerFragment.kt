@@ -13,12 +13,10 @@ import java.io.File
 
 class ImageViewerFragment : DialogFragment() {
 
-    private val args : ImageViewerFragmentArgs by navArgs()
+    private val args: ImageViewerFragmentArgs by navArgs()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
         return activity?.let {
-
             val photoFileName = args.crimeImage
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater
@@ -42,10 +40,7 @@ class ImageViewerFragment : DialogFragment() {
 
             builder.setView(view)
 
-
             builder.create()
-
         } ?: throw IllegalStateException("activity cannot be null")
-
     }
 }

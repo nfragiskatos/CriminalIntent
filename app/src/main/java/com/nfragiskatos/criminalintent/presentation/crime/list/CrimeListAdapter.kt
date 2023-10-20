@@ -65,5 +65,4 @@ class CrimeListAdapter(
     override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
         holder.bind(crimes[position], onCrimeClicked)
     }
-
 }

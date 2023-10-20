@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import kotlin.math.roundToInt
 
-fun getScaledBitmap(path: String, destWidth: Int, destHeight: Int) : Bitmap {
+fun getScaledBitmap(path: String, destWidth: Int, destHeight: Int): Bitmap {
     // Read dimensions of image store on disc
     val options = BitmapFactory.Options()
     options.inJustDecodeBounds = true

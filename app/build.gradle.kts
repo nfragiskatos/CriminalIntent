@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("androidx.navigation.safeargs")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -36,7 +37,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding=true
+        viewBinding = true
     }
 }
 

@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.provider.ContactsContract.*
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.Menu
@@ -47,7 +46,7 @@ class CrimeDetailsFragment : Fragment() {
     private var _binding: FragmentCrimeDetailsBinding? = null
     private val args: CrimeDetailsFragmentArgs by navArgs()
 
-    private var photoName : String? = null
+    private var photoName: String? = null
 
     private val viewModel: CrimeDetailsViewModel by viewModels {
         CrimeDetailsViewModelFactory(args.crimeId)
@@ -70,15 +69,13 @@ class CrimeDetailsFragment : Fragment() {
             }
         }
 
-    private val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicture()) {photoTaken ->
+    private val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicture()) { photoTaken ->
         if (photoTaken && photoName != null) {
             viewModel.updateCrime { oldCrime ->
                 oldCrime.copy(photoFileName = photoName)
-
             }
         }
     }
-
 
     private val binding
         get() = checkNotNull(_binding) {
@@ -137,7 +134,7 @@ class CrimeDetailsFragment : Fragment() {
                     requireContext(),
                     "com.nfragiskatos.criminalintent.fileprovider",
                     photoFile
-                    )
+                )
 
                 takePhoto.launch(photoUri)
             }
@@ -196,7 +193,9 @@ class CrimeDetailsFragment : Fragment() {
 
             if (crime.photoFileName != null) {
                 crimePhoto.setOnClickListener {
-                    findNavController().navigate(CrimeDetailsFragmentDirections.viewImage(crime.photoFileName))
+                    findNavController().navigate(
+                        CrimeDetailsFragmentDirections.viewImage(crime.photoFileName)
+                    )
                 }
             }
         }
@@ -224,7 +223,6 @@ class CrimeDetailsFragment : Fragment() {
                 viewModel.deleteCrime(it)
                 findNavController().popBackStack()
             }
-
         }
     }
 
@@ -247,7 +245,7 @@ class CrimeDetailsFragment : Fragment() {
     }
 
     private fun parseContactSelection(contactUri: Uri) {
-        val queryFields = arrayOf(Contacts.DISPLAY_NAME)
+        val queryFields = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
 
         val queryCursor =
             requireActivity().contentResolver.query(contactUri, queryFields, null, null, null)
@@ -266,7 +264,7 @@ class CrimeDetailsFragment : Fragment() {
         val contactQueryCursor =
             requireActivity().contentResolver.query(
                 contactUri,
-                arrayOf(Contacts._ID),
+                arrayOf(ContactsContract.Contacts._ID),
                 null,
                 null,
                 null
@@ -276,9 +274,9 @@ class CrimeDetailsFragment : Fragment() {
             if (contactCursor.moveToFirst()) {
                 val contactId = contactCursor.getLong(0)
                 val phoneQueryCursor = requireActivity().contentResolver.query(
-                    CommonDataKinds.Phone.CONTENT_URI,
-                    arrayOf(CommonDataKinds.Phone.NUMBER),
-                    "${CommonDataKinds.Phone.CONTACT_ID} = $contactId",
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER),
+                    "${ContactsContract.CommonDataKinds.Phone.CONTACT_ID} = $contactId",
                     null,
                     null
                 )
@@ -330,14 +328,20 @@ class CrimeDetailsFragment : Fragment() {
 
                     binding.crimePhoto.setImageBitmap(scaledBitmap)
                     binding.crimePhoto.tag = photoFileName
-                    binding.crimePhoto.contentDescription = getString(R.string.crime_photo_image_description)
+                    binding.crimePhoto.contentDescription = getString(
+                        R.string.crime_photo_image_description
+                    )
                 }
             } else {
                 binding.crimePhoto.setImageBitmap(null)
                 binding.crimePhoto.tag = null
-                binding.crimePhoto.contentDescription = getString(R.string.crime_photo_no_image_description)
+                binding.crimePhoto.contentDescription = getString(
+                    R.string.crime_photo_no_image_description
+                )
             }
-            binding.crimePhoto.announceForAccessibility(getString(R.string.crime_photo_updated_announcement))
+            binding.crimePhoto.announceForAccessibility(
+                getString(R.string.crime_photo_updated_announcement)
+            )
         }
     }
 
@@ -350,6 +354,5 @@ class CrimeDetailsFragment : Fragment() {
                 Toast.makeText(context, "Please enter a title", Toast.LENGTH_LONG).show()
             }
         }
-
     }
 }

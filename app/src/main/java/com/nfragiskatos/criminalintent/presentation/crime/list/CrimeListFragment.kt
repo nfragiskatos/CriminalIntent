@@ -1,7 +1,6 @@
 package com.nfragiskatos.criminalintent.presentation.crime.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -53,7 +52,7 @@ class CrimeListFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.crimes.collect{ crimes ->
+                viewModel.crimes.collect { crimes ->
                     binding.crimeRecyclerView.adapter = CrimeListAdapter(crimes) {
                         findNavController().navigate(CrimeListFragmentDirections.showCrimeDetail(it))
                     }
